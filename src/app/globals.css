@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0709;
+  --bg-2: #170f10;
+  --bg-3: #1f1416;
+  --surface: #241619;
+  --surface-2: #2c1a1c;
+  --hairline: #3a2226;
+  --ink: #f1e4d3;
+  --ink-dim: #b6a292;
+  --ink-faint: #8a7568;
+
+  --ember: #e0812c;
+  --ember-dim: #8a5322;
+  --blood: #c4353a;
+  --blood-bright: #ff5257;
+  --gold: #d4a94f;
+  --gold-dim: #7a5f2a;
+
+  --ad-bg: #17181a;
+  --ad-border: #34363a;
+  --ad-ink: #85898f;
+
+  --voted: #2f7a4f;
+  --voted-bright: #45b876;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-hairline: var(--hairline);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-ember: var(--ember);
+  --color-ember-dim: var(--ember-dim);
+  --color-blood: var(--blood);
+  --color-blood-bright: var(--blood-bright);
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-ad-bg: var(--ad-bg);
+  --color-ad-border: var(--ad-border);
+  --color-ad-ink: var(--ad-ink);
+  --color-voted: var(--voted);
+  --color-voted-bright: var(--voted-bright);
+
+  --font-display: var(--font-kanit);
+  --font-body: var(--font-sarabun);
+  --font-mono: var(--font-chakra);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(224, 129, 44, 0.14), transparent 60%),
+    radial-gradient(ellipse 700px 400px at 100% 20%, rgba(196, 53, 58, 0.11), transparent 60%);
+  position: relative;
+}
+
+/* Film-grain texture + edge vignette — gives the dark theme some depth
+   instead of reading as a flat gradient. Fixed + pointer-events:none so it
+   never affects layout or scrolling. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 65% at 50% 40%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+@keyframes ember-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(var(--drift));
+    opacity: 0;
+  }
+}
+
+.animate-ember-rise {
+  animation-name: ember-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drip-fall {
+  0% {
+    top: -30px;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.55;
+  }
+  100% {
+    top: 115%;
+    opacity: 0;
+  }
+}
+
+.animate-drip-fall {
+  animation-name: drip-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Two identical copies of the strip sit side by side; scrolling exactly one
+   copy's width (-50% of the doubled container) makes the loop point
+   invisible — the strip appears to scroll forever with no restart gap. */
+@keyframes marquee-loop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-loop {
+  animation-name: marquee-loop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-marquee-loop > span {
+  padding-right: 3.25rem;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out;
+}
+
+@keyframes vote-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-vote-pop {
+  animation: vote-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe-only {
+    animation: none !important;
+    display: none !important;
+  }
+
+  .animate-marquee-loop {
+    animation: none;
+    position: static !important;
+  }
+
+  .animate-marquee-loop > span:nth-child(2) {
+    display: none;
+  }
+
+  .animate-fade-in,
+  .animate-vote-pop {
+    animation: none;
+  }
+}
