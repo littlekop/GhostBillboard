@@ -37,13 +37,22 @@ export default function TipFab() {
                 className="w-full h-auto"
               />
             </div>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="mt-4 text-sm text-ink-faint hover:text-ink"
-            >
-              ปิด
-            </button>
+            <div className="flex items-center justify-center gap-4 mt-4">
+              <a
+                href="/tip-qr.jpg"
+                download="ghost-billboard-tip-qr.jpg"
+                className="text-sm font-semibold text-gold hover:text-ember"
+              >
+                💾 บันทึกรูป
+              </a>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="text-sm text-ink-faint hover:text-ink"
+              >
+                ปิด
+              </button>
+            </div>
           </div>
         </div>
       )}
