@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-5P3PPCKX9S";
+const ADSENSE_CLIENT_ID = "ca-pub-8127478011085658";
 
 // Each family spans several weights x 2 subsets (10 font files total), so
 // preloading all of them blocks the initial render. next/font still emits
@@ -46,6 +47,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="th"
       className={`${kanit.variable} ${sarabun.variable} ${chakraPetch.variable}`}
     >
+      <head>
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen flex flex-col font-body antialiased">
         {children}
         <Script
