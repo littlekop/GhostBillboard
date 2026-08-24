@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { AffiliateItem } from "@/lib/types";
 
-const WINDOW_SIZE = 3;
+const WINDOW_SIZE = 2;
 const ROTATE_MS = 7000;
 
 export default function AffiliateRow({
@@ -31,7 +31,7 @@ export default function AffiliateRow({
   return (
     <div className="my-2 mb-6.5">
       <p className="font-display font-bold text-[15px] text-ember mb-3">{title}</p>
-      <div className="grid gap-2.5" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))" }}>
+      <div className="grid grid-cols-2 gap-2.5 max-w-[360px] mx-auto">
         {visible.map((item) => (
           <a
             key={item.name}
