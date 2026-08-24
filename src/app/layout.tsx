@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Kanit, Sarabun, Chakra_Petch } from "next/font/google";
 import Script from "next/script";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-5P3PPCKX9S";
@@ -56,6 +57,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-screen flex flex-col font-body antialiased">
         {children}
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+            });
+          `}
+        </Script>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
@@ -68,6 +81,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+        <CookieConsent />
       </body>
     </html>
   );
