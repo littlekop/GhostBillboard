@@ -131,7 +131,7 @@ export const AFF_ITEMS: AffiliateItem[] = [
   },
   {
     name: "หมอน TOTORI คลาวด์",
-    desc: "หมอนนุ่มจนลืมกลัวผี",
+    desc: "หมอนนุ่ม ฟังเรื่องผีสบาย",
     emoji: "☁️",
     color: "#1a1a24",
     url: "https://s.shopee.co.th/1VydwMx6o3",
