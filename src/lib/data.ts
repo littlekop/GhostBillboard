@@ -91,7 +91,7 @@ export const FEATURED_CHANNELS: FeaturedChannel[] = [
   {
     name: "The Ghost Radio",
     desc: "คลื่นสยองของคนรุ่นใหม่ — ช่องเล่าเรื่องผีที่คนไทยรู้จักกันแทบทุกบ้าน",
-    url: "https://www.youtube.com/@Theghostradio",
+    url: "https://www.facebook.com/theghostradio",
   },
   {
     name: "The Shock",
