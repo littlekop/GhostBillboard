@@ -50,9 +50,17 @@ export default async function HomePage({
         <TickerBar />
 
         {stories.length === 0 ? (
-          <p className="text-ink-dim text-sm py-10 text-center">
-            ยังไม่มีเรื่องผีในช่วงเวลานี้ ลองเปลี่ยนตัวกรองดู
-          </p>
+          <div className="text-center py-14">
+            <p className="text-3xl mb-2">👻</p>
+            <p className="text-ink text-[15px] mb-1">
+              {range === "all" ? "ยังไม่มีเรื่องผีในชาร์ตเลย" : "ยังไม่มีเรื่องผีในช่วงเวลานี้"}
+            </p>
+            <p className="text-ink-faint text-sm">
+              {range === "all"
+                ? "วางลิงก์ YouTube ด้านบนเพื่อส่งเรื่องแรกเข้าชาร์ตได้เลย"
+                : "ลองเปลี่ยนตัวกรองช่วงเวลาดู"}
+            </p>
+          </div>
         ) : (
           <>
             {isRankView && first && second && third && (

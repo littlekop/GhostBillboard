@@ -2,6 +2,17 @@ import type { FeaturedChannel } from "@/lib/types";
 
 const ICONS = ["📻", "🎙️"];
 
+function platformLabel(url: string): string {
+  try {
+    const host = new URL(url).hostname;
+    if (host.includes("facebook.com")) return "ไปที่เพจ Facebook →";
+    if (host.includes("youtube.com")) return "ไปที่ช่อง YouTube →";
+    return "ไปที่ช่อง →";
+  } catch {
+    return "ไปที่ช่อง →";
+  }
+}
+
 export default function FeaturedChannels({
   channels,
 }: {
@@ -54,7 +65,7 @@ export default function FeaturedChannels({
               </div>
               <p className="text-[13px] text-ink-dim leading-relaxed m-0 mb-2">{c.desc}</p>
               <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-gold group-hover:text-ember">
-                ไปที่ช่อง YouTube →
+                {platformLabel(c.url)}
               </span>
             </div>
           </a>
