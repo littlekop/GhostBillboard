@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Kanit, Sarabun, Chakra_Petch } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-5P3PPCKX9S";
 
 // Each family spans several weights x 2 subsets (10 font files total), so
 // preloading all of them blocks the initial render. next/font still emits
@@ -45,6 +48,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-screen flex flex-col font-body antialiased">
         {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );
