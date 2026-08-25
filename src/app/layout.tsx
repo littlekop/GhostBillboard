@@ -40,6 +40,13 @@ export const metadata: Metadata = {
   },
   description:
     "วางลิงก์ YouTube โหวตให้เรื่องหลอนที่สุดขึ้นอันดับ 1 ดูชาร์ต Top 10 เรื่องผีไทยและเล่นคลิปได้ในหน้าเว็บ",
+  openGraph: {
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
