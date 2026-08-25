@@ -9,7 +9,6 @@ import AdSlot from "@/components/AdSlot";
 import AffiliateRow from "@/components/AffiliateRow";
 import FeaturedChannels from "@/components/FeaturedChannels";
 import Footer from "@/components/Footer";
-import TipFab from "@/components/TipFab";
 import EmberField from "@/components/EmberField";
 import QuickViewProvider from "@/components/QuickViewProvider";
 
@@ -130,7 +129,6 @@ export default async function HomePage({
       </main>
 
       <Footer />
-      <TipFab />
     </QuickViewProvider>
   );
 }
