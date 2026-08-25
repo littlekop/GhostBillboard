@@ -25,3 +25,16 @@ export async function fetchOEmbed(youtubeId: string): Promise<OEmbedInfo | null>
     thumbnailUrl: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
   };
 }
+
+// Best-effort — falls back to no description if the API key is missing,
+// the clip has none, or the request fails for any reason.
+export async function fetchVideoDescription(youtubeId: string): Promise<string | null> {
+  try {
+    const res = await fetch(`/api/youtube-description?id=${youtubeId}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.description ?? null;
+  } catch {
+    return null;
+  }
+}

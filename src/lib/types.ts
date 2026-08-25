@@ -12,6 +12,7 @@ export interface Story {
   title: string;
   thumbnailUrl: string;
   channelName: string;
+  description: string | null;
   category: Category;
   voteCount: number;
   createdAt: string; // ISO timestamp

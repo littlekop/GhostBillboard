@@ -8,6 +8,7 @@ interface StoryRow {
   slug: string;
   thumbnail_url: string | null;
   channel_name: string | null;
+  description: string | null;
   category: string | null;
   vote_count: number;
   created_at: string;
@@ -21,6 +22,7 @@ function fromRow(row: StoryRow): Story {
     title: row.title,
     thumbnailUrl: row.thumbnail_url ?? `https://i.ytimg.com/vi/${row.youtube_id}/hqdefault.jpg`,
     channelName: row.channel_name ?? "",
+    description: row.description,
     category: (row.category ?? "thai") as Category,
     voteCount: row.vote_count,
     createdAt: row.created_at,

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
-import { extractYoutubeId, fetchOEmbed } from "@/lib/youtube";
+import { extractYoutubeId, fetchOEmbed, fetchVideoDescription } from "@/lib/youtube";
 import { slugify, storyPath } from "@/lib/slug";
 import { getDeviceId } from "@/lib/deviceId";
 import { storyPath as buildStoryPath } from "@/lib/slug";
@@ -88,6 +88,7 @@ export default function Hero({ topStory }: { topStory?: Story | null }) {
     }
 
     const slug = slugify(preview.title);
+    const description = await fetchVideoDescription(preview.youtubeId);
     const { data, error: insertError } = await supabase
       .from("stories")
       .insert({
@@ -96,6 +97,7 @@ export default function Hero({ topStory }: { topStory?: Story | null }) {
         slug,
         thumbnail_url: preview.thumbnailUrl,
         channel_name: preview.channelName,
+        description,
         device_id: getDeviceId(),
       })
       .select("id")

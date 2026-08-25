@@ -27,7 +27,9 @@ export async function generateMetadata({
   if (!story) return {};
 
   const title = story.title;
-  const description = `${story.title} โดย ${story.channelName} — โหวตแล้ว ${story.voteCount.toLocaleString("th-TH")} ครั้งบนบิลบอร์ดผี`;
+  const description =
+    story.description?.slice(0, 155) ||
+    `${story.title} โดย ${story.channelName} — โหวตแล้ว ${story.voteCount.toLocaleString("th-TH")} ครั้งบนบิลบอร์ดผี`;
 
   return {
     title,
@@ -61,7 +63,7 @@ export default async function StoryPage({
     "@context": "https://schema.org",
     "@type": "VideoObject",
     name: story.title,
-    description: story.title,
+    description: story.description || story.title,
     thumbnailUrl: [story.thumbnailUrl],
     uploadDate: story.createdAt,
     embedUrl: `https://www.youtube.com/embed/${story.youtubeId}`,
@@ -109,6 +111,15 @@ export default async function StoryPage({
               />
               <ReportButton storyId={story.id} />
             </div>
+
+            {story.description && (
+              <div className="mt-4 pt-4 border-t border-hairline">
+                <p className="font-display font-bold text-[15px] text-ink mb-1.5">เรื่องย่อ</p>
+                <p className="text-sm text-ink-dim leading-relaxed whitespace-pre-wrap">
+                  {story.description}
+                </p>
+              </div>
+            )}
           </div>
 
           <ChatPanel storyId={story.id} />
