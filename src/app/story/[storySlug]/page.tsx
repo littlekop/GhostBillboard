@@ -118,6 +118,14 @@ export default async function StoryPage({
                 <p className="text-sm text-ink-dim leading-relaxed whitespace-pre-wrap">
                   {story.description}
                 </p>
+                <a
+                  href={`https://www.youtube.com/watch?v=${story.youtubeId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-xs text-ink-faint hover:text-ember mt-1.5"
+                >
+                  อ่านคำบรรยายเต็มที่ YouTube →
+                </a>
               </div>
             )}
           </div>
